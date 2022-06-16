@@ -32,8 +32,8 @@ public class CarroMapper {
                 .id(domain.getId())
                 .anoModelo(domain.getAnoModelo())
                 .placa(domain.getPlaca())
-                .proprietario(pessoaMapper.toResponseCliente(domain.getProprietario()))
-                .modelo(modeloCarroMapper.toResponse(domain.getModelo()))
+                .modelo(domain.getModelo().getDescricao())
+                .marca(domain.getModelo().getMarcaCarro().getDescricao())
                 .build();
     }
 

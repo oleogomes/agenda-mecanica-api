@@ -11,8 +11,8 @@ import lombok.*;
 public class CarroResponse {
 
     private Long id;
-    private ModeloCarroResponse modelo;
+    private String modelo;
     private String anoModelo;
+    private String marca;
     private String placa;
-    private ClienteResponse proprietario;
 }
