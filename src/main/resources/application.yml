@@ -1,0 +1,34 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /agenda-mecanica
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    com.zaxxer.hikari: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    open-in-view: false
+  datasource:
+    username: ffzbzvpwmylmah
+    password: 39aba5152a6339edfde39d03ec3eb2938b799f284e18a525701611c666783cac
+    url: jdbc:postgresql://ec2-54-80-123-146.compute-1.amazonaws.com:5432/d1cfjgskg12uo9?currentSchema=public
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      maximumPoolSize: 3
+      maxLifetime: 20000
