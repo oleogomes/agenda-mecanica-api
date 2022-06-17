@@ -41,6 +41,9 @@ public class CarroService {
             carros = carroMapper.toResponse(carrosDomain);
         }
         return carros;
+    }
 
+    public Carro getCarroById(Long idCarro) {
+        return carroRepository.getOne(idCarro);
     }
 }

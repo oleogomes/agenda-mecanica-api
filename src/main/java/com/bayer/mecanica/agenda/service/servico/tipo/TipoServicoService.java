@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TipoServicoService {
 
@@ -23,5 +25,13 @@ public class TipoServicoService {
 
         repository.save(tipoServico);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    public TipoServico getTipoServicoById(Long idTipoServico) {
+        return repository.getOne(idTipoServico);
+    }
+
+    public List<TipoServico> getTiposServico() {
+        return repository.findAll();
     }
 }

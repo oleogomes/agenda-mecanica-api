@@ -3,6 +3,7 @@ package com.bayer.mecanica.agenda.mapper.servico;
 import com.bayer.mecanica.agenda.domain.Servico;
 import com.bayer.mecanica.agenda.mapper.carro.CarroMapper;
 import com.bayer.mecanica.agenda.mapper.pessoa.PessoaMapper;
+import com.bayer.mecanica.agenda.representation.servico.AgendarServicoRequest;
 import com.bayer.mecanica.agenda.representation.servico.ServicoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,4 +40,5 @@ public class ServicoMapper {
     public List<ServicoResponse> toResponse(List<Servico> domain) {
         return domain.stream().map(this::toResponse).collect(Collectors.toList());
     }
+    
 }
