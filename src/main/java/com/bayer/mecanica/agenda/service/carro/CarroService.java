@@ -44,6 +44,6 @@ public class CarroService {
     }
 
     public Carro getCarroById(Long idCarro) {
-        return carroRepository.getOne(idCarro);
+        return carroRepository.findById(idCarro).get();
     }
 }

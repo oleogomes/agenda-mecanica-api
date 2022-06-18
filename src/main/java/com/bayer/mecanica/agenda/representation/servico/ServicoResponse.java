@@ -17,7 +17,7 @@ public class ServicoResponse {
     private LocalDateTime dataHora;
     private CarroResponse carro;
     private StatusServicoResponse status;
-    private TipoServicoResponse tipo;
+    private TipoServicoResponse tipoServico;
     private MecanicoResponse mecanico;
     private ClienteResponse cliente;
 }

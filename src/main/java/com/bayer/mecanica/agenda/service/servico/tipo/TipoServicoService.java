@@ -28,7 +28,7 @@ public class TipoServicoService {
     }
 
     public TipoServico getTipoServicoById(Long idTipoServico) {
-        return repository.getOne(idTipoServico);
+        return repository.findById(idTipoServico).get();
     }
 
     public List<TipoServico> getTiposServico() {
