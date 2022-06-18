@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -28,6 +27,6 @@ public class MecanicoController {
 
     @PostMapping("/agenda")
     public ResponseEntity<List<ServicoResponse>> getAgendaDia() {
-        return ResponseEntity.ok(servicoMapper.toResponse(servicoService.getServicosByData(LocalDate.now())));
+        return ResponseEntity.ok(servicoMapper.toResponse(servicoService.getServicosDia()));
     }
 }

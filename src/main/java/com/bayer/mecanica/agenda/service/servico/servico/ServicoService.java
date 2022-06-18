@@ -9,7 +9,6 @@ import com.bayer.mecanica.agenda.repository.servico.ServicoRepository;
 import com.bayer.mecanica.agenda.repository.servico.StatusServicoRepository;
 import com.bayer.mecanica.agenda.representation.authorization.response.MessageResponse;
 import com.bayer.mecanica.agenda.representation.servico.AgendarServicoRequest;
-import com.bayer.mecanica.agenda.representation.servico.ServicoResponse;
 import com.bayer.mecanica.agenda.service.carro.CarroService;
 import com.bayer.mecanica.agenda.service.pessoa.PessoaService;
 import com.bayer.mecanica.agenda.service.servico.tipo.TipoServicoService;
@@ -20,8 +19,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicoService {
@@ -64,8 +63,12 @@ public class ServicoService {
         return servicos;
     }
 
-    public List<Servico> getServicosByData(LocalDate data) {
-        return this.servicoRepository.findAllByDataHora(data);
+    public List<Servico> getServicosDia() {
+        List<Servico> servicos = this.servicoRepository.findAll();
+        List<Servico> servicosDia = servicos.stream().
+                filter(servico -> servico.getDataHora().toLocalDate().isEqual(LocalDate.now()) ).
+                collect(Collectors.toList());
+        return servicosDia;
     }
 
     private LocalDateTime montaDataHora(String dataHora) {

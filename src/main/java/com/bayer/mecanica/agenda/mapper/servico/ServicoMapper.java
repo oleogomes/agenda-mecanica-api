@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,14 +28,18 @@ public class ServicoMapper {
     StatusServicoMapper statusServicoMapper;
 
     public ServicoResponse toResponse(Servico domain) {
-        return ServicoResponse.builder()
+        ServicoResponse servicoResponse =  ServicoResponse.builder()
                 .id(domain.getId())
                 .carro(carroMapper.toResponse(domain.getCarro()))
-                .mecanico(pessoaMapper.toResponseMecanico(domain.getMecanico()))
                 .cliente(pessoaMapper.toResponseCliente(domain.getCliente()))
-                .tipo(tipoServicoMapper.toResponse(domain.getTipo()))
+                .tipoServico(tipoServicoMapper.toResponse(domain.getTipo()))
+                .dataHora(domain.getDataHora())
                 .status(statusServicoMapper.toResponse(domain.getStatus()))
                 .build();
+        if(Objects.nonNull(domain.getMecanico())) {
+            servicoResponse.setMecanico(pessoaMapper.toResponseMecanico(domain.getMecanico()));
+        }
+        return servicoResponse;
     }
 
     public List<ServicoResponse> toResponse(List<Servico> domain) {
