@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @PostMapping("/servicos/listar")
-    public ResponseEntity<List<ServicoResponse>> getServicosCliente(Integer idCliente) {
+    public ResponseEntity<List<ServicoResponse>> getServicosCliente(@RequestParam String idCliente) {
         return ResponseEntity.ok(servicoMapper.toResponse(servicoService.getServicosByCliente(idCliente)));
     }
 

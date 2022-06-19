@@ -49,6 +49,7 @@ public class PessoaMapper {
                 .id(domain.getId())
                 .email(domain.getEmail())
                 .nome(domain.getNome())
+                .username(domain.getUsername())
                 .servicos(servicos.size())
                 .build();
     }

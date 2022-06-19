@@ -9,6 +9,8 @@ import com.bayer.mecanica.agenda.repository.servico.ServicoRepository;
 import com.bayer.mecanica.agenda.repository.servico.StatusServicoRepository;
 import com.bayer.mecanica.agenda.representation.authorization.response.MessageResponse;
 import com.bayer.mecanica.agenda.representation.servico.AgendarServicoRequest;
+import com.bayer.mecanica.agenda.representation.servico.AtualizarServicoRequest;
+import com.bayer.mecanica.agenda.representation.servico.ServicoResponse;
 import com.bayer.mecanica.agenda.service.carro.CarroService;
 import com.bayer.mecanica.agenda.service.pessoa.PessoaService;
 import com.bayer.mecanica.agenda.service.servico.tipo.TipoServicoService;
@@ -57,8 +59,8 @@ public class ServicoService {
         return ResponseEntity.ok(new MessageResponse("Serviço agendado com sucesso!"));
     }
 
-    public List<Servico> getServicosByCliente(Integer idCliente) {
-        Pessoa cliente = pessoaService.getPessoaById(idCliente.longValue());
+    public List<Servico> getServicosByCliente(String idCliente) {
+        Pessoa cliente = pessoaService.getPessoaById(Long.valueOf(idCliente));
         List<Servico> servicos = servicoRepository.findAllByCliente(cliente).get();
         return servicos;
     }
@@ -69,6 +71,27 @@ public class ServicoService {
                 filter(servico -> servico.getDataHora().toLocalDate().isEqual(LocalDate.now()) ).
                 collect(Collectors.toList());
         return servicosDia;
+    }
+
+    public void iniciarServico(AtualizarServicoRequest request) {
+        Servico servico = servicoRepository.findById(request.getIdServico().longValue()).get();
+        Pessoa mecanico = pessoaService.getPessoaById(request.getIdMecanico().longValue());
+
+        servico.setMecanico(mecanico);
+        servico.setStatus(statusServicoRepository.findById(EStatus.EM_ANDAMENTO.getCodigo().longValue()).get());
+
+        servicoRepository.save(servico);
+    }
+
+    public Servico finalizarServico(AtualizarServicoRequest request) {
+        Servico servico = servicoRepository.findById(request.getIdServico().longValue()).get();
+        Pessoa mecanico = pessoaService.getPessoaById(request.getIdMecanico().longValue());
+
+        servico.setMecanico(mecanico);
+        servico.setStatus(statusServicoRepository.findById(EStatus.FINALIZADO.getCodigo().longValue()).get());
+
+        servicoRepository.save(servico);
+        return servico;
     }
 
     private LocalDateTime montaDataHora(String dataHora) {
