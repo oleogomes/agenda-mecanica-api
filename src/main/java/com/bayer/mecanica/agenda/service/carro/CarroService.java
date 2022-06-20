@@ -4,6 +4,7 @@ import com.bayer.mecanica.agenda.domain.Carro;
 import com.bayer.mecanica.agenda.domain.pessoa.Pessoa;
 import com.bayer.mecanica.agenda.mapper.carro.CarroMapper;
 import com.bayer.mecanica.agenda.repository.carro.CarroRepository;
+import com.bayer.mecanica.agenda.representation.authorization.response.MessageResponse;
 import com.bayer.mecanica.agenda.representation.carro.CadastrarCarroRequest;
 import com.bayer.mecanica.agenda.representation.carro.CarroResponse;
 import com.bayer.mecanica.agenda.service.pessoa.PessoaService;
@@ -30,7 +31,7 @@ public class CarroService {
     public ResponseEntity<?> cadastrarCarro(CadastrarCarroRequest request) {
         Carro carro = carroMapper.toDomain(request);
         carroRepository.save(carro);
-        return ResponseEntity.ok("Carro cadastrado com sucesso");
+        return ResponseEntity.ok(new MessageResponse("Carro cadastrado com sucesso!"));
     }
 
     public List<CarroResponse> getCarrosByPropietario(String idPessoa) {

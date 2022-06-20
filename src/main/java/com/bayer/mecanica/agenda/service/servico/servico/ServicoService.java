@@ -73,6 +73,11 @@ public class ServicoService {
         return servicosDia;
     }
 
+    public List<Servico> getServicos() {
+        List<Servico> servicos = this.servicoRepository.findAll();
+        return servicos;
+    }
+
     public void iniciarServico(AtualizarServicoRequest request) {
         Servico servico = servicoRepository.findById(request.getIdServico().longValue()).get();
         Pessoa mecanico = pessoaService.getPessoaById(request.getIdMecanico().longValue());

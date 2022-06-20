@@ -24,7 +24,7 @@ public class TipoServicoService {
         TipoServico tipoServico = tipoServicoMapper.toDomain(request);
 
         repository.save(tipoServico);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Serviço cadastrado com sucesso"));
     }
 
     public TipoServico getTipoServicoById(Long idTipoServico) {
