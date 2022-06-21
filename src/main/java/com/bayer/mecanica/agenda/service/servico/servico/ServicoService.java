@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +69,7 @@ public class ServicoService {
     public List<Servico> getServicosDia() {
         List<Servico> servicos = this.servicoRepository.findAll();
         List<Servico> servicosDia = servicos.stream().
-                filter(servico -> servico.getDataHora().toLocalDate().isEqual(LocalDate.now()) ).
+                filter(servico -> servico.getDataHora().toLocalDate().isEqual(LocalDate.now(ZoneId.of("America/Sao_Paulo")))).
                 collect(Collectors.toList());
         return servicosDia;
     }
