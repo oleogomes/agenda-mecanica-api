@@ -2,6 +2,7 @@ package com.bayer.mecanica.agenda.controller;
 
 import com.bayer.mecanica.agenda.domain.Servico;
 import com.bayer.mecanica.agenda.mapper.servico.ServicoMapper;
+import com.bayer.mecanica.agenda.representation.authorization.response.MessageResponse;
 import com.bayer.mecanica.agenda.representation.servico.AtualizarServicoRequest;
 import com.bayer.mecanica.agenda.representation.servico.ServicoResponse;
 import com.bayer.mecanica.agenda.service.servico.servico.ServicoService;
@@ -33,11 +34,12 @@ public class MecanicoController {
     @PostMapping("servico/iniciar")
     public ResponseEntity<?> iniciarServico(@Valid @RequestBody AtualizarServicoRequest request) {
         servicoService.iniciarServico(request);
-        return ResponseEntity.ok("Serviço iniciado com sucesso!");
+        return ResponseEntity.ok(new MessageResponse("Servico iniciado com sucesso"));
     }
 
     @PostMapping("servico/finalizar")
-    public ResponseEntity<Servico> finalizarServico(@Valid @RequestBody AtualizarServicoRequest request) {
-        return ResponseEntity.ok(servicoService.finalizarServico(request));
+    public ResponseEntity<?> finalizarServico(@Valid @RequestBody AtualizarServicoRequest request) {
+        servicoService.finalizarServico(request);
+        return ResponseEntity.ok(new MessageResponse("Servico finalizado com sucesso"));
     }
 }

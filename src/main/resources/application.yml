@@ -24,9 +24,9 @@ spring:
             non_contextual_creation: true
     open-in-view: false
   datasource:
-    username: ffzbzvpwmylmah
-    password: 39aba5152a6339edfde39d03ec3eb2938b799f284e18a525701611c666783cac
-    url: jdbc:postgresql://ec2-54-80-123-146.compute-1.amazonaws.com:5432/d1cfjgskg12uo9?currentSchema=public
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    url: ${JDBC_DATABASE_URL}
     driver-class-name: org.postgresql.Driver
 
     hikari:

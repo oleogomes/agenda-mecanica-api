@@ -78,7 +78,7 @@ public class ServicoService {
         return servicos;
     }
 
-    public void iniciarServico(AtualizarServicoRequest request) {
+    public AtualizarServicoRequest iniciarServico(AtualizarServicoRequest request) {
         Servico servico = servicoRepository.findById(request.getIdServico().longValue()).get();
         Pessoa mecanico = pessoaService.getPessoaById(request.getIdMecanico().longValue());
 
@@ -86,9 +86,10 @@ public class ServicoService {
         servico.setStatus(statusServicoRepository.findById(EStatus.EM_ANDAMENTO.getCodigo().longValue()).get());
 
         servicoRepository.save(servico);
+        return request;
     }
 
-    public Servico finalizarServico(AtualizarServicoRequest request) {
+    public AtualizarServicoRequest finalizarServico(AtualizarServicoRequest request) {
         Servico servico = servicoRepository.findById(request.getIdServico().longValue()).get();
         Pessoa mecanico = pessoaService.getPessoaById(request.getIdMecanico().longValue());
 
@@ -96,7 +97,7 @@ public class ServicoService {
         servico.setStatus(statusServicoRepository.findById(EStatus.FINALIZADO.getCodigo().longValue()).get());
 
         servicoRepository.save(servico);
-        return servico;
+        return request;
     }
 
     private LocalDateTime montaDataHora(String dataHora) {
